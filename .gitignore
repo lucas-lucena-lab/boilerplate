@@ -1,0 +1,13 @@
+# Never commit secrets / state
+.credentials.json
+*.key
+*.pem
+.env
+.env.*
+
+# Backups created by install.sh
+*.backup-*
+
+# OS junk
+.DS_Store
+Thumbs.db
