@@ -1,0 +1,3 @@
+# Shared response defaults. install.sh merges these keys into the local config.
+model_verbosity = "low"
+personality = "pragmatic"

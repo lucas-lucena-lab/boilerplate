@@ -1,9 +1,14 @@
 # Never commit secrets / state
-.credentials.json
+**/.credentials.json
+**/auth.json
+**/.claude.json
 *.key
 *.pem
 .env
 .env.*
+
+# Machine-local tool settings
+**/settings.local.json
 
 # Backups created by install.sh
 *.backup-*
