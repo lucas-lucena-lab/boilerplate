@@ -1,4 +1,4 @@
-# dotfiles
+# boilerplate
 
 Shared Codex and Claude Code defaults for macOS and Windows.
 
@@ -12,8 +12,8 @@ Install and authenticate GitHub CLI, then run:
 
 ```bash
 mkdir -p ~/projects
-gh repo clone lucas-lucena-lab/dotfiles ~/projects/dotfiles
-~/projects/dotfiles/install.sh
+gh repo clone lucas-lucena-lab/boilerplate ~/projects/boilerplate
+~/projects/boilerplate/install.sh
 ```
 
 Start new Codex and Claude sessions after installation.
@@ -24,9 +24,9 @@ Open PowerShell, install and authenticate GitHub CLI, then run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$HOME\projects" | Out-Null
-gh repo clone lucas-lucena-lab/dotfiles "$HOME\projects\dotfiles"
+gh repo clone lucas-lucena-lab/boilerplate "$HOME\projects\boilerplate"
 powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$HOME\projects\dotfiles\install.ps1"
+  -File "$HOME\projects\boilerplate\install.ps1"
 ```
 
 `ExecutionPolicy Bypass` applies only to that PowerShell process. It does not
@@ -50,16 +50,16 @@ Administrator access or Developer Mode.
 ## Update an existing machine
 
 ```bash
-git -C ~/projects/dotfiles pull --ff-only
-~/projects/dotfiles/install.sh
+git -C ~/projects/boilerplate pull --ff-only
+~/projects/boilerplate/install.sh
 ```
 
 On Windows:
 
 ```powershell
-git -C "$HOME\projects\dotfiles" pull --ff-only
+git -C "$HOME\projects\boilerplate" pull --ff-only
 powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$HOME\projects\dotfiles\install.ps1"
+  -File "$HOME\projects\boilerplate\install.ps1"
 ```
 
 The installer is idempotent, so it is safe to run again.
