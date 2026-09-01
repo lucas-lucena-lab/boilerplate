@@ -5,9 +5,9 @@ param(
     )
 )
 
-# Installs shared Codex and Claude defaults without copying credentials or
-# replacing machine-specific settings. Compatible with Windows PowerShell 5.1
-# and PowerShell 7.
+# Installs shared Codex, Claude, Grok, and Copilot defaults without copying
+# credentials or replacing machine-specific settings. Compatible with Windows
+# PowerShell 5.1 and PowerShell 7.
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -215,8 +215,12 @@ function Merge-ClaudeSettings {
 
 $CodexSource = Join-Path $DotfilesRoot 'codex'
 $ClaudeSource = Join-Path $DotfilesRoot 'claude'
+$GrokSource = Join-Path $DotfilesRoot 'grok'
+$CopilotSource = Join-Path $DotfilesRoot 'copilot'
 $CodexTarget = Join-Path $TargetHome '.codex'
 $ClaudeTarget = Join-Path $TargetHome '.claude'
+$GrokTarget = Join-Path $TargetHome '.grok'
+$CopilotTarget = Join-Path $TargetHome '.copilot'
 
 Merge-TomlDefaults `
     -Source (Join-Path $CodexSource 'config.toml') `
@@ -240,5 +244,11 @@ Install-ManagedFile `
         Join-Path (Join-Path $ClaudeTarget 'output-styles') `
             'clear-concise-english.md'
     )
+Install-ManagedFile `
+    -Source (Join-Path $GrokSource 'AGENTS.md') `
+    -Destination (Join-Path $GrokTarget 'AGENTS.md')
+Install-ManagedFile `
+    -Source (Join-Path $CopilotSource 'copilot-instructions.md') `
+    -Destination (Join-Path $CopilotTarget 'copilot-instructions.md')
 
-Write-Host 'done. Start new Codex and Claude sessions to load the defaults.'
+Write-Host 'done. Start new Codex, Claude, Grok, and Copilot sessions to load the defaults.'

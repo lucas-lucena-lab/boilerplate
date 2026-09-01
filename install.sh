@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Installs shared Codex and Claude defaults without copying credentials or
-# replacing machine-specific settings.
+# Installs shared Codex, Claude, Grok, and Copilot defaults without copying
+# credentials or replacing machine-specific settings.
 
 set -euo pipefail
 
@@ -160,5 +160,9 @@ link_file "$DOTFILES/claude/CLAUDE.md" "$TARGET_HOME/.claude/CLAUDE.md"
 link_file \
   "$DOTFILES/claude/output-styles/clear-concise-english.md" \
   "$TARGET_HOME/.claude/output-styles/clear-concise-english.md"
+link_file "$DOTFILES/grok/AGENTS.md" "$TARGET_HOME/.grok/AGENTS.md"
+link_file \
+  "$DOTFILES/copilot/copilot-instructions.md" \
+  "$TARGET_HOME/.copilot/copilot-instructions.md"
 
-echo "done. Start new Codex and Claude sessions to load the defaults."
+echo "done. Start new Codex, Claude, Grok, and Copilot sessions to load the defaults."

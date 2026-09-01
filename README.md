@@ -1,6 +1,7 @@
 # boilerplate
 
-Shared Codex and Claude Code defaults for macOS and Windows.
+Shared defaults for Codex, Claude Code, Grok Build, and GitHub Copilot CLI on
+macOS and Windows.
 
 The setup keeps task-completion responses short, direct, and easy to read for
 people who use English as a second language. It does not copy authentication,
@@ -16,7 +17,7 @@ gh repo clone lucas-lucena-lab/boilerplate ~/projects/boilerplate
 ~/projects/boilerplate/install.sh
 ```
 
-Start new Codex and Claude sessions after installation.
+Start new Codex, Claude, Grok, and Copilot sessions after installation.
 
 ## Install on Windows
 
@@ -40,12 +41,16 @@ change the system execution policy.
 - `claude/CLAUDE.md` is installed as `~/.claude/CLAUDE.md`.
 - The custom Claude output style is installed under
   `~/.claude/output-styles/` and selected in `~/.claude/settings.json`.
+- `grok/AGENTS.md` is installed as `~/.grok/AGENTS.md`.
+- `copilot/copilot-instructions.md` is installed as
+  `~/.copilot/copilot-instructions.md` and applies to every model selected in
+  Copilot CLI.
 
 Existing instruction files are backed up before they are replaced. Existing
-Codex and Claude settings are preserved; the installer changes only the keys
-tracked in this repository. The macOS installer uses symbolic links for the
-instruction files. The Windows installer copies them, so it works without
-Administrator access or Developer Mode.
+settings are preserved; the installer changes only the keys tracked in this
+repository. The macOS installer uses symbolic links for the instruction files.
+The Windows installer copies them, so it works without Administrator access or
+Developer Mode.
 
 ## Update an existing machine
 
@@ -66,5 +71,5 @@ The installer is idempotent, so it is safe to run again.
 
 ## Credentials
 
-Log in to GitHub, Codex, and Claude separately on every machine. Credentials
-must never be added to this repository.
+Log in to GitHub, Codex, Claude, and Grok separately on every machine.
+Credentials must never be added to this repository.
