@@ -28,6 +28,20 @@ Source: adapted from "Clean Code pra Agentes de IA" by Fabio Akita
 - Reference issue numbers / commit SHAs when a line exists because
   of a specific bug or upstream constraint.
 
+## Code review comments
+
+- When I ask you to post comments on a code review (PR review comments,
+  replies on review threads, or a summary before resolving a thread),
+  do not use dash punctuation in the comment text. No em dash (—),
+  no en dash (–), and no hyphen used as a sentence separator or bullet
+  marker. Use separate sentences, commas, parentheses, or a colon
+  instead. Hyphens inside real compound words or identifiers
+  (`well-known`, `utf-8`, `x-forwarded-for`) are fine.
+- Say what was actually done for each finding. A resolved thread with
+  no explanation is not useful to a reviewer.
+- Report the final state from the source (GitHub), do not assume a
+  post succeeded. Retry server errors and confirm the result.
+
 ## Tests
 
 - Tests run with a single command (define it in the project's CLAUDE.md).
