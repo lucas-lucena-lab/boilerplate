@@ -7,69 +7,80 @@ The setup keeps task-completion responses short, direct, and easy to read for
 people who use English as a second language. It does not copy authentication,
 tokens, project trust, or other machine-specific state.
 
-## Install on macOS
+## Install
 
-Install and authenticate GitHub CLI, then run:
+There is no install script. [`INSTALL.md`](INSTALL.md) is a prompt: give it to
+an AI agent with filesystem access on the machine being set up, and it performs
+the install.
+
+Clone the repository, then point your agent at the prompt:
 
 ```bash
-mkdir -p ~/projects
-gh repo clone lucas-lucena-lab/boilerplate ~/projects/boilerplate
-~/projects/boilerplate/install.sh
+gh repo clone lucas-lucena-lab/boilerplate ~/Projects/boilerplate
 ```
 
-Start new Codex, Claude, Grok, and Copilot sessions after installation.
-
-## Install on Windows
-
-Open PowerShell, install and authenticate GitHub CLI, then run:
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$HOME\projects" | Out-Null
-gh repo clone lucas-lucena-lab/boilerplate "$HOME\projects\boilerplate"
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$HOME\projects\boilerplate\install.ps1"
+```
+Read ~/Projects/boilerplate/INSTALL.md and follow it.
 ```
 
-`ExecutionPolicy Bypass` applies only to that PowerShell process. It does not
-change the system execution policy.
+Windows is the same, with the path spelled `$HOME\Projects\boilerplate`.
+
+Start new Codex, Claude, Grok, and Copilot sessions after installation. A
+running session has already loaded its instructions and will not see the change.
+
+### Why a prompt instead of a script
+
+A script appends, overwrites, or creates. It cannot tell a default it is allowed
+to change from a local decision it must keep, so it either clobbers your machine
+or refuses to touch anything.
+
+The scripts this replaced did both. The TOML merge matched key names by line
+prefix, so on a Codex config with profiles it wrote a global default into
+`[profiles.fast]`, deleted that profile's own `personality`, and never set the
+top-level key it was asked to set. The macOS settings merge round-tripped
+`~/.claude/settings.json` through `plutil`, which preserved every value and
+minified the file to a single line, escaping every `/` as `\/`. Neither failure
+reported anything. Both are named as traps in the prompt.
+
+An agent can read what is already there, judge which parts are yours, and say
+what it changed. That is the whole difference.
 
 ## What is installed
 
-- `codex/AGENTS.md` is installed as `~/.codex/AGENTS.md`.
+- `codex/AGENTS.md` becomes `~/.codex/AGENTS.md`.
 - The Codex verbosity and personality defaults are merged into
-  `~/.codex/config.toml`.
-- `claude/CLAUDE.md` is installed as `~/.claude/CLAUDE.md`.
-- The custom Claude output style is installed under
-  `~/.claude/output-styles/` and selected in `~/.claude/settings.json`.
-- `grok/AGENTS.md` is installed as `~/.grok/AGENTS.md`.
-- `copilot/copilot-instructions.md` is installed as
-  `~/.copilot/copilot-instructions.md` and applies to every model selected in
-  Copilot CLI.
+  `~/.codex/config.toml`, at the top level only.
+- `claude/CLAUDE.md` becomes `~/.claude/CLAUDE.md`.
+- The custom Claude output style is installed under `~/.claude/output-styles/`
+  and selected through the `outputStyle` key in `~/.claude/settings.json`.
+- `grok/AGENTS.md` becomes `~/.grok/AGENTS.md`.
+- `copilot/copilot-instructions.md` becomes `~/.copilot/copilot-instructions.md`
+  and applies to every model selected in Copilot CLI.
 
-Existing instruction files are backed up before they are replaced. Existing
-settings are preserved; the installer changes only the keys tracked in this
-repository. The macOS installer uses symbolic links for the instruction files.
-The Windows installer copies them, so it works without Administrator access or
-Developer Mode.
+Instruction files are symlinked on macOS and Linux, and copied on Windows so the
+install needs neither Administrator nor Developer Mode. Only the keys listed
+above are touched in the two settings files. Everything else in them is
+machine-local and is preserved: permissions, model, effort level, plugins,
+hooks, and Codex project trust.
+
+Existing files are backed up before they are replaced, and the agent reports
+where. A local customisation the repository does not have is treated as yours:
+the prompt requires the agent to keep it and say which shared rules are missing,
+rather than replacing it.
 
 ## Update an existing machine
 
 ```bash
-git -C ~/projects/boilerplate pull --ff-only
-~/projects/boilerplate/install.sh
+git -C ~/Projects/boilerplate pull --ff-only
 ```
 
-On Windows:
-
-```powershell
-git -C "$HOME\projects\boilerplate" pull --ff-only
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File "$HOME\projects\boilerplate\install.ps1"
-```
-
-The installer is idempotent, so it is safe to run again.
+Instruction files are symlinks, so on macOS and Linux the pull is the update.
+Run the prompt again when the settings keys change, or on Windows where the
+files are copies. It is idempotent: a second run reports that everything is
+already in place and changes nothing.
 
 ## Credentials
 
 Log in to GitHub, Codex, Claude, and Grok separately on every machine.
-Credentials must never be added to this repository.
+Credentials must never be added to this repository. Codex project trust is
+machine state and is never copied between machines.
