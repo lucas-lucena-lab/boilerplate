@@ -35,6 +35,10 @@ install.
 | `claude/output-styles/*.md` | `~/.claude/output-styles/` | link or copy |
 | `grok/AGENTS.md` | `~/.grok/AGENTS.md` | link or copy |
 | `copilot/copilot-instructions.md` | `~/.copilot/copilot-instructions.md` | link or copy |
+| `gemini/GEMINI.md` | `~/.gemini/GEMINI.md` | link or copy |
+| `kimi/SYSTEM.md` | `~/.kimi-code/SYSTEM.md` | link or copy |
+| `cursor/rules/shared-defaults.mdc` | `~/.cursor/rules/shared-defaults.mdc` | link or copy |
+| `opencode/AGENTS.md` | `~/.config/opencode/AGENTS.md` | link or copy |
 
 Symlink on macOS and Linux. Copy on Windows, so the install needs neither
 Administrator nor Developer Mode.
@@ -53,7 +57,10 @@ one, establish which of these it is, because the correct action differs:
 
 ## Merge rules
 
-### Instruction files (`AGENTS.md`, `CLAUDE.md`, `copilot-instructions.md`)
+### Instruction files
+
+This rule covers `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `SYSTEM.md`,
+`copilot-instructions.md`, and Cursor's `shared-defaults.mdc`.
 
 These are prose. Diff the existing file against this repo's version.
 
@@ -63,6 +70,11 @@ These are prose. Diff the existing file against this repo's version.
   keep the local file and report exactly which repo rules are missing from it,
   or ask whether to append them. Never drop a rule the user wrote.
 - Conflicting versions of the same rule: ask. Do not pick.
+
+When the user approves a merge, keep the repository file together as one
+unchanged block so Dev Utils can verify that every shared default is present.
+Keep Cursor frontmatter at the start of its `.mdc` file. Keep Kimi's
+`${base_prompt}` placeholder so its built-in prompt still loads.
 
 Local content is a rule about *this machine* or *this person*, not a stale copy
 of a shared default. A section this repo never had is local content.
@@ -133,11 +145,11 @@ for the rest and leaving the failure implicit.
 ## Credentials
 
 This repository holds none, installs none, and must never receive any. Log in to
-GitHub, Codex, Claude, and Grok separately on every machine. Codex project trust
+GitHub and each harness separately on every machine. Codex project trust
 (`[projects."…"]`) is machine state: never copy it between machines, and never
 add an entry the user did not ask for.
 
 ## After
 
-Tell the user to start new Codex, Claude, Grok, and Copilot sessions. A running
-session has already loaded its instructions and will not see the change.
+Tell the user to start new harness sessions. A running session has already
+loaded its instructions and will not see the change.

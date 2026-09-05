@@ -1,7 +1,7 @@
 # boilerplate
 
-Shared defaults for Codex, Claude Code, Grok Build, and GitHub Copilot CLI on
-macOS and Windows.
+Shared defaults for Codex, Claude Code, Gemini CLI, Kimi Code, Grok Build,
+GitHub Copilot CLI, Cursor Agent, and OpenCode on macOS and Windows.
 
 The setup keeps task-completion responses short, direct, and easy to read for
 people who use English as a second language. It does not copy authentication,
@@ -25,8 +25,8 @@ Read ~/Projects/boilerplate/INSTALL.md and follow it.
 
 Windows is the same, with the path spelled `$HOME\Projects\boilerplate`.
 
-Start new Codex, Claude, Grok, and Copilot sessions after installation. A
-running session has already loaded its instructions and will not see the change.
+Start new harness sessions after installation. A running session has already
+loaded its instructions and will not see the change.
 
 ### Why a prompt instead of a script
 
@@ -56,6 +56,12 @@ what it changed. That is the whole difference.
 - `grok/AGENTS.md` becomes `~/.grok/AGENTS.md`.
 - `copilot/copilot-instructions.md` becomes `~/.copilot/copilot-instructions.md`
   and applies to every model selected in Copilot CLI.
+- `gemini/GEMINI.md` becomes `~/.gemini/GEMINI.md`.
+- `kimi/SYSTEM.md` becomes `~/.kimi-code/SYSTEM.md`. It keeps Kimi's built-in
+  system prompt and adds the shared defaults.
+- `cursor/rules/shared-defaults.mdc` becomes an always-applied global rule at
+  `~/.cursor/rules/shared-defaults.mdc`.
+- `opencode/AGENTS.md` becomes `~/.config/opencode/AGENTS.md`.
 
 Instruction files are symlinked on macOS and Linux, and copied on Windows so the
 install needs neither Administrator nor Developer Mode. Only the keys listed
@@ -67,6 +73,10 @@ Existing files are backed up before they are replaced, and the agent reports
 where. A local customisation the repository does not have is treated as yours:
 the prompt requires the agent to keep it and say which shared rules are missing,
 rather than replacing it.
+
+The repository is a static source of configuration, so it does not need a
+background process. Dev Utils can verify the checkout and installed files
+without changing them.
 
 ## Update an existing machine
 
@@ -81,6 +91,6 @@ already in place and changes nothing.
 
 ## Credentials
 
-Log in to GitHub, Codex, Claude, and Grok separately on every machine.
-Credentials must never be added to this repository. Codex project trust is
-machine state and is never copied between machines.
+Log in to GitHub and each harness separately on every machine. Credentials must
+never be added to this repository. Codex project trust is machine state and is
+never copied between machines.
