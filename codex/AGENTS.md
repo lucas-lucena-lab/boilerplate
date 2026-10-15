@@ -25,6 +25,20 @@
 - Report the final state from the source, do not assume a post succeeded.
   Retry server errors and confirm the result.
 
+## Cleanup
+
+- Before you finish any task, remove the temporary things that task created,
+  and only those. Never delete anything you did not create or cannot link to
+  the task. If you are not sure, list it for the user instead.
+- When the work in a git worktree you created is finished (merged, or dropped
+  by the user), run the build tool's clean command in it (for example
+  `cargo clean`), then remove the worktree. Build output can live outside the
+  worktree, so removing the directory alone may not free the space. Ask first
+  if the worktree still has uncommitted changes.
+- Never run a broad cleanup such as `docker system prune` unless the user
+  approves it after you show a read-only inventory. Delete by an exact list of
+  IDs. Stopped, old, or unreferenced does not mean disposable.
+
 ## Task completion responses
 
 - Lead with the result.
